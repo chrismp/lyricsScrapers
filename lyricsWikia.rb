@@ -82,29 +82,11 @@ def lyricsWikiaCrawler(baseURL,artistListingURL)
 end
 
 begin
-	# range = ('A'..'Z')
 	baseURL = 'http://lyrics.wikia.com'
 	categoryArtists = '/Category:Artists_'
-
-	# range.each{|ltr|
-		# artistListingURL = baseURL+categoryArtists+ltr
-		artistListingURL = baseURL+categoryArtists+ARGV[0]
-		lyricsWikiaCrawler(baseURL,artistListingURL)
-	# }
+	artistListingURL = baseURL+categoryArtists+ARGV[0]
+	lyricsWikiaCrawler(baseURL,artistListingURL)
 rescue Exception => e
-	p "ERROR: #{e}"
-	puts e.backtrace
-
-	File.open('../ERRORS.txt','a'){|f|
-		[
-			'====================',
-			Time.now,
-			e,
-			e.backtrace
-		].each{|err| 
-			f.puts(err)
-		}
-	}
-	exit
+	errorLogging(e)
 end
 

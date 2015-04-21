@@ -4,17 +4,9 @@ require_relative './helpers/methods.rb'
 
 
 begin
-baseURL = 'http://www.lyrics.net'
-# range = ('a'..'z').to_a.insert(-1,0)
-# range.each{|ltr| 
-	# letterOrNumber = ltr.to_s
+	baseURL = 'http://www.lyrics.net'
 	letterOrNumber = ARGV[0]
 	artistListingURL = baseURL+'/artists/'+letterOrNumber+'/99999'
-
-	# if(openPage(artistListingURL)===false)
-		
-	# end
-	
 	artistListingPage = openPage(artistListingURL)
 	artistListingPage.css('#content-body tr a').each{|a| 
 		artist = a.text
@@ -54,21 +46,7 @@ baseURL = 'http://www.lyrics.net'
 		p '========='
 	}
 	p '==================================================='
-# }
 rescue Exception => e
-	p "ERROR: #{e}"
-	puts e.backtrace
-
-	File.open('../ERRORS.txt','a'){|f|
-		[
-			'====================',
-			Time.now,
-			e,
-			e.backtrace
-		].each{|err| 
-			f.puts(err)
-		}
-	}
-	exit
+	errorLogging()
 end
 

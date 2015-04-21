@@ -51,30 +51,12 @@ def lyricsDotComCrawler(baseURL,ltr,pageNumber)
 	else 
 		return false
 	end
-
 end
 
 
 begin
 	baseURL = 'http://www.lyrics.com'
-	# range = (ARGV[0].to_s..'z').to_a.insert(-1,'num')
-
-	# range.each{|ltr|
-		lyricsDotComCrawler(baseURL,ARGV[0],0)
-	# }
+	lyricsDotComCrawler(baseURL,ARGV[0],0)
 rescue Exception => e
-	p "ERROR: #{e}"
-	puts e.backtrace
-
-	File.open('../ERRORS.txt','a'){|f|
-		[
-			'====================',
-			Time.now,
-			e,
-			e.backtrace
-		].each{|err| 
-			f.puts(err)
-		}
-	}
-	exit
+	errorLogging()
 end
